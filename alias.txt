@@ -1,0 +1,21 @@
+alias gb='git branch -vv'
+alias gc='git checkout'
+alias gd='git diff'
+alias gr='git pull --rebase'
+alias grep='grep --color=auto'
+alias gs='git status'
+alias gsf='git show --pretty="format:" --name-only'
+alias gt='git tree'
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias lll='ls -l --group-directories-first'
+alias ls='ls --color=auto'
+alias	tree='log --decorate --oneline --graph --all --topo-order -30'
+alias	treef='log --decorate --oneline --graph --all --topo-order'
+
+# Need to have upstream set on branch for this to work
+# gb --set-upstream-to=origin/master <branch name>
+# git checkout -b <branch name> origin/master
+        upstream = !(git branch -vv | grep '*' | cut -d '/' -f 2 | cut -d : -f 1)
+        onereview = !(MYBASE=`git rev-parse HEAD~1` && MYUPSTREAM=`git upstream` && git push origin HEAD:refs/for/$MYUPSTREAM%base=$MYBASE)
