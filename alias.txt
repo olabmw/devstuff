@@ -11,8 +11,8 @@ alias la='ls -A'
 alias ll='ls -alF'
 alias lll='ls -l --group-directories-first'
 alias ls='ls --color=auto'
-alias	tree='log --decorate --oneline --graph --all --topo-order -30'
-alias	treef='log --decorate --oneline --graph --all --topo-order'
+alias tree='git log --decorate --oneline --graph --all --topo-order -30'
+alias treef='git log --decorate --oneline --graph --all --topo-order'
 
 # Need to have upstream set on branch for this to work
 # gb --set-upstream-to=origin/master <branch name>
