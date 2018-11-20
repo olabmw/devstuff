@@ -1,0 +1,167 @@
+
+
+Chapter x loops
+	in
+	break
+	continue
+
+Chapter x
+strings
+
+>>> a = 'pub'
+>>> b = ''.join(['p', 'u', 'b'])
+>>> a == b
+True
+>>> a is b
+False
+
+is is identity testing, == is equality testing
+
+
+Chapter x
+file handling
+
+fhand = open('test.txt')
+for line in fhand:
+	line = line.rstrip()
+	if not line.startswith('From'):continue
+	words=line.split()
+	print words[2]
+
+
+
+
+Chapter 7
+Strings are immutable
+
+Chapter 8 lists
+Lists
+[1,2,3]
+['test','blaj']
+['test',1,[1,2]]
+
+len() - length of a list
+range() - generates a list
+
+for i in range(len(list)):
+	friend = friends[i]
+	print i
+
+concatenate lists using + 
+a=[1,2,3]
+b=[4,5,6]
+c=a+b
+
+slice lists using :
+t=[1,2,3,4,5,6,7]
+t[1:3]
+[2,3]
+[:]
+
+x=list()
+type(x)
+dir(x)
+....
+
+.append()
+
+
+is something in a list
+some = [1,2,9]
+9 in some
+true
+
+3 not in some
+true
+
+sorted(list) - dont modify the original list
+.sort() - modifies the original list
+.len()
+.max()
+.min()
+.sum()
+
+split() - split string on blank(s) default, can specify delimiter
+
+
+Chapter 9 Dictionaries
+
+List - linear collection of values that stay i order
+Dictionary - bag of values each with it's own label - java map - like a database
+
+bag = dict()
+bag['money']= 12
+bag['money']=bag['money'] + 2
+print bag
+
+bag = {'money':12}
+
+bag.get(name,0) - 0 is default value if key does not exist
+bag[name] = bag.get(name,0)+1
+
+for key in bag...
+list(bag) - list of keys
+bag.keys() - same as above
+bag.values() - same order as keys
+bag.items() - tuples
+
+loop over tuples (two iteration variables)
+for aaa,bbb in bag.items()
+
+
+Chapter 10 Tuples
+-----------------
+Third type of collections
+much like lists
+but they are immutable, similarly to string
+
+x = ('string1', 'string2')
+print x[1]
+
+cant .sort()
+cant .append()
+
+t = tuple()
+dir(t)
+['count', 'index']
+
+tuples are more efficient! (mem performance)
+use for temp variables
+
+(x, y) = (4, 'fred')
+x, y = 4, 'fred'
+
+for (k,v) in d.items():  (.items() returns a list of tuples)
+	print k, v
+=
+tups = d.items()
+print tups
+
+tuples are comparable
+(0, 1, 2) < (5, 1, 2)
+true
+('jones', 'sally') < ('jones', 'fred')
+false
+
+sorting lists of tuples, sort by keys
+d = {'a':10, 'b':1, 'c':22}
+t=d.items()
+t.sort()
+t=sorted(d.items())
+
+for k, v in sorted(d.items()) (key sorted order)
+print k, v
+
+sort by values instead of key
+d = {'a':10, 'b':1, 'c':22}
+tmp = list()
+for k, v in c.items():
+	tmp.append( (v, k) )
+tmp.sort(reverse=True)
+print tmp
+the tuples cant be modified but the order of the list can
+
+http://wiki.python.org/moin/HowTo/Sorting
+
+list comprehension creates a dynamic list
+print sorted( [ (v,k) for k,v in c.items() ] )

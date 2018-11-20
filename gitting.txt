@@ -1,0 +1,162 @@
+*******************
+* Git cheat sheet *
+*******************
+
+Links
+-----
+http://marklodato.github.io/visual-git-guide/index-en.html
+http://onlywei.github.io/explain-git-with-d3/#
+https://wildlyinaccurate.com/a-hackers-guide-to-git
+
+
+What is HEAD
+------------
+HEAD -> reference to most recent commit on a certain branch
+HEAD^ -> parent of current commit
+HEAD~ or HEAD~1 -> parent of current commit
+HEAD~~ or HEAD~2 -> grandparent of current commit
+Detached HEAD -> points to a specific commit in the history (not pointing to a branch)
+
+$ cat .git/HEAD
+ref: refs/heads/master
+$ cat .git/refs/heads/master
+2e468a31829a2b424449865afaab69ef8b279c78
+
+Log
+---
+some useful git log options
+    git log -p
+    git log -g
+    git log --stat
+    git log --oneline
+    git log --pretty=oneline
+    git log --graph
+    git log --author=ola
+    git log -(number)
+    tree = log --decorate --oneline --graph --all --topo-order -30
+    treef = log --decorate --oneline --graph --all --topo-order
+
+Show
+----
+Show the changes from the last commit
+    git show
+Show the changes from a specific commit
+    git show <commit id>
+
+Show who edited something
+-------------------------
+Show who edited a line in a file and in what revision
+    git blame <filename>
+
+
+Diffing
+-------
+Shows diff for staged files
+    git diff --staged
+    git diff --cached
+
+Diff between branches
+    git diff <branch name>
+
+Ignore whitespace changes
+    git diff --ignore-space-at-eol -b -w (--ignore-blank-lines, from git version 1.84)
+
+
+Remove tracking
+---------------
+Removes a file from staging area but keeps it in the working directory as untracked
+    git rm --cached <filename>
+
+
+Undoing things
+--------------
+Reset the staging area to match the most recent commit, leaves working directory unchanged
+    git reset
+Reset the staging area and the working directory to match the most recent commit -> Warning! scrap all uncommited changes
+    git reset --hard
+Reset the staging area and the working directory to match the parent commit -> Warning! scrap all changes and latest commit
+    git reset --hard <commit id>
+Reset the last commit but keep the changes in the staging area and working directory
+    git reset --soft <commit id>
+
+Removes a commit by adding a new one (can be applied to a commit back in history)
+    git revert <commit id>
+
+reset vs revert... (Revert should be used when changes are in public history, reset can be used on local changes)
+
+Delete all untracked files and folders from the working directory
+"Dryrun"
+    git clean -n
+
+    git clean -df
+
+
+Discard changes (specified file is copied from the staging area)
+    git checkout <file>
+Discard changes (specified file is copied from a specified commmit to the staging area and the working directory)
+    git checkout HEAD <file>
+
+
+Branching
+---------
+Show all branches
+    git branch -a
+Create branch
+    git branch <branchname>
+Checkout the branch
+    git checkout <branchname>
+Create branch and checkout
+    git checkout -b <branchname>
+Delete a branch
+    git branch -d <branchname>
+
+recommended to have a clean working state when switching branches (no uncommitted changes)
+
+ll .git/refs/heads/ -> local branches
+ll .git/refs/remotes/ -> tracking branches
+
+
+checkout remote branch
+    git checkout <branchname>
+
+checkout with tracking
+    git branch -f --track my_local_branch origin/my_remote_branch
+
+show tracking
+    git remote show origin
+
+push to remote branch
+    push origin HEAD:refs/for/gic_split
+
+
+Rebasing (Replays commits from the current branch to another) Keeps the tree tidy (use only on local history)
+--------
+Checkout a branch and get the commits from master
+    git checkout <branch>
+    git rebase master
+
+
+Merging (git does a fast forward merge if possible, else it does a three way merge, its a new commit with the changes from the two commits)
+-------
+Merge changes into master
+    git checkout master
+    git merge <branch>
+
+
+Rewriting history (use only on local history)
+-----------------
+Can be used for changing message, adding files, squashing commits (combine several commits), google it.
+    git rebase -i <HEAD~x>
+
+
+Find faulty commit
+Search between commits to find when a fault was introduced, google it.
+------------------
+    git bisect
+
+
+Your safety net, the reflog
+---------------------------
+Almost all previous actions are saved in the reflog. (only for local repo)
+Can be used to recover a lost commit or whatever, google it.
+    git reflog
